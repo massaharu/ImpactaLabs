@@ -1,0 +1,38 @@
+
+--------------------------------------------------------
+SELECT 
+	--a.CODIGO, 
+	a.CODEXT AS RA, 
+	a.NOME, 
+	a.EMAIL,
+	MAX(e.NOME) AS CURSO
+	--d.CODIGO 
+FROM SophiA.FISICA a
+INNER JOIN SOPHIA.MATRICULA b ON b.FISICA = a.CODIGO
+INNER JOIN SophiA.TURMAS c ON c.CODIGO = b.TURMA_REGULAR
+INNER JOIN sophia.CURSOS e ON e.PRODUTO = c.CURSO
+LEFT JOIN (	
+
+	SELECT 
+		a1.CODIGO
+	FROM SophiA.FISICA a1
+	INNER JOIN SOPHIA.MATRICULA b2 ON b2.FISICA = a1.CODIGO
+	WHERE 
+		b2.STATUS = 0
+	GROUP BY 
+		a1.CODIGO
+		
+) d ON d.CODIGO = a.CODIGO
+WHERE 
+	b.STATUS in(0,5) AND 
+	d.CODIGO IS NULL AND 
+	--e.NIVEL in(1,2) -- GRADUACAO
+	--e.NIVEL in(3,5) -- POS
+	e.NIVEL in(4) -- COLEGIO
+GROUP BY 
+	a.CODIGO,a.CODEXT, a.NOME, a.EMAIL, d.CODIGO
+ORDER BY 
+	MAX(e.NOME), a.NOME
+--------------------------------------------------------------
+
+SELECT * FROM SOPHIA.FUNCIONARIOS WHERE APELIDO ='evelin'

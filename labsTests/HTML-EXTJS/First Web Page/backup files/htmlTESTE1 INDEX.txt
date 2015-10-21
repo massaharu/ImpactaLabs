@@ -1,0 +1,40 @@
+<body>
+<!--Títulos-->
+<h1> Title 1</h1>
+<h2> Title 2</h2>
+<h4> Title 3</h4>
+<hr />
+<!-- Listagem--><ol>
+<li> <font size="10" color="red"> item </font>
+	<ul>
+    	<li> item
+        <li> item
+        <li> item
+     </ul>
+<li> <font size="6" color="green"> item </font>
+	<ul>
+		<li> item
+        <li> item
+        <li> item
+    </ul>
+<li> <font size="8" color="blue"> item </font>
+	<ul>
+		<li> item
+        <li> item
+        <li> item
+    </ul>
+</ol>
+
+<p>
+<hr />
+<pre>
+<b>Hello</b> 
+<i><u>World.</i></u>
+
+
+<i>Página de <hr /> <br />teste</i>
+</pre>
+</p>
+
+</body>
+</html>

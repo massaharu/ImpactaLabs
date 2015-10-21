@@ -1,0 +1,5 @@
+/************ Corrige bug de div com float left dentro  de outro do mesmo ****************/
+display: block;
+content: " ";
+clear: both;
+/**********************/16:44 01/08/2014

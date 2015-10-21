@@ -1,0 +1,92 @@
+////////////////////////////////////////////////////////////////////////////////
+///////////////// MASK CPF /////////////////////////////////////////////////////
+
+// PHP
+function maskCPF($nrcpf){
+	return substr($nrcpf, 0, -8).'.'.substr($nrcpf, 3, -5).'.'.substr($nrcpf, 6, -2).'-'.substr($nrcpf, -2);
+}
+//JAVASCRIPT
+function fn_maskCPF(cpf){
+	return cpf.substring(0, 3)+'.'+cpf.substring(3, 6)+'.'+cpf.substring(6, 9)+'-'+cpf.substring(9);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////// DESTROI RECURSIVAMENTE O DIRETORIO E OS ARQUIVOS PERTENCENTES A ELE//////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function destroy_dir($dir) { 
+	
+	if (!is_dir($dir) || is_link($dir)) return unlink($dir); 
+	
+	foreach (scandir($dir) as $file) { 
+		if ($file == '.' || $file == '..') continue; 
+		if (!destroy_dir($dir . DIRECTORY_SEPARATOR . $file)) { 
+			chmod($dir . DIRECTORY_SEPARATOR . $file, 0777); 
+			if (!destroy_dir($dir . DIRECTORY_SEPARATOR . $file)) return false; 
+		}; 
+	} 
+	return rmdir($dir); 
+} 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////// Retira atribuitos CSS inline de um elemento ///////////////////////////////////////////////////////////////////////////////////////
+function fn_removeCssProp($txt, $props){
+		
+	$txtB = str_replace("&nbsp;", " ", $txt);
+		
+	foreach($props as $value){
+		
+		$txtPosIni = strpos($txtB, $value);
+		$txtPosFin = strpos(substr($txtB, $txtPosIni), ";") + 1;
+			
+		if($txtPosIni) {
+			$txtB = str_replace(substr($txtB, $txtPosIni, $txtPosFin), "", $txtB );
+		}
+	}
+		
+	return $txtB;
+}	
+
+ex: 
+fn_removeCssProp(
+	$texto,
+	array(
+		'font-family',
+		'font-size'	
+	)
+);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////// RETIRA DUPLICADE DE UM ARRAY DE OBJETO POR UM DETERMINADO CAMPO ///////////
+function fn_distinctByFild($c, $param){
+		
+	$lists2 = array();
+	$duplicatedSala = array();
+	
+	foreach($c as $flag){
+					
+		if(count($lists2) > 0){
+	
+			//loop para tirar a duplicidade 
+			foreach($lists2 as $list){
+					
+				if($list[$param] == $flag[$param]){					
+					
+					//Joga o id das salas duplicadas ao array($duplicatedSala)
+					array_push($duplicatedSala, array(
+						$param=>$list[$param]
+					));
+				}
+			}
+				
+			if(!in_array(array($param=>$flag[$param]), $duplicatedSala)){
+				
+				array_push($lists2, $flag);
+			}
+		
+		}else{
+					
+			array_push($lists2, $flag);
+		}
+	}
+	
+	return $lists2;
+}
+
+ex: fn_distinctByFild($array, $campo);

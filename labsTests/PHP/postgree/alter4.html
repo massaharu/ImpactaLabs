@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="/simpacweb/labs/Massaharu/labsTests/PHP//postgree/ext-3.3.1/resources/css/ext-all.css" />
+<script src="/simpacweb/labs/Massaharu/labsTests/PHP//postgree/ext-3.3.1/adapter/ext/ext-base.js" type="text/javascript"></script>
+<script src="/simpacweb/labs/Massaharu/labsTests/PHP//postgree/ext-3.3.1/ext-all.js" type="text/javascript"></script>
+<script type="text/javascript">
+	Ext.onReady(function(){
+		new Ext.Viewport({
+			layout: 'border',
+			items: [{
+				region: 'west',
+				collapsible: false,
+				split:true,
+				autoScroll:true,
+				title: 'Navigation',
+				width: 600,
+				items:[{
+					xtype:'listview',
+					id:'alllistview',
+					store: new Ext.data.JsonStore({
+						url:'json/getAlunoPosTurma.php',
+						root:'myData',
+						id:'storeprogramadeaula',
+						fields:['n','descurso','desnome','id'],
+						autoLoad:true
+					}),
+					multiSelect: true,
+					loadMask:true,
+					reserveScrollOffset: true,
+					columns: [{
+						header: 'Disciplina',
+						width: .4,
+						dataIndex: 'descurso'
+					},{
+						header: 'Aluno',
+						width: .4,
+						dataIndex: 'desnome'
+					}],
+					listeners:{
+						'click':function(obj,i){
+							var store = obj.getStore().getAt(i);
+							Ext.getCmp('desdisciplinaiclass').setValue(store.get('descurso'));
+							Ext.getCmp('desnomeiclass').setValue(store.get('desnome'));
+							Ext.getCmp('a1').setValue('');
+						}
+					}
+				}]
+			}, {
+				region: 'center',
+				border:false,
+				items:[{
+					xtype:'form',
+					padding:20,
+					id:'formsave',
+					defaults:{
+						anchor:'100%'
+					},
+					items:[{
+						fieldLabel:'Nome',
+						id:'desnomeiclass',
+						xtype:'displayfield'
+					},{
+						fieldLabel:'Disciplina iClass',
+						id:'desdisciplinaiclass',
+						xtype:'displayfield'
+					},{
+						typeAhead: true,
+						xtype:'combo',
+						allowBlank:false,
+						fieldLabel:'Turmas',
+						triggerAction: 'all',
+						lazyRender:true,
+						mode: 'local',
+						id:'a2',
+						store: new Ext.data.JsonStore({
+							url:'json/getTurmas.php',
+							root:'myData',
+							fields:['idturma','desturma'],
+							autoLoad:true
+						}),
+						valueField: 'idturma',
+						hiddenName: 'idturma',
+						name:'idturma',
+						displayField: 'desturma'
+					}],
+					buttons:[{
+						text:'Salvar',
+						handler:function(){
+							if(Ext.getCmp('formsave').getForm().isValid()){
+								Ext.getCmp('formsave').getForm().submit({
+									url:'ajax/save4.php',
+									params:{
+										id:Ext.getCmp('alllistview').getSelectedRecords()[0].data.id,
+									},
+									success:function(a,b){
+										var a = Ext.getCmp('alllistview').getSelectedRecords()[0];
+										Ext.getCmp('alllistview').getStore().remove(a);
+										Ext.getCmp('alllistview').select(0);
+									}
+								})
+							}
+						}
+					}]
+				}]
+			}]
+		});
+	});
+</script>
+</head>
+<body>
+</body>
+</html>
+
+
+
+
+

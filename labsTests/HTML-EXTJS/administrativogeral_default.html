@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Administrativo Geral</title>
+<link rel="stylesheet" type="text/css" href="../bibliotecas/ext-3.4.0/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="../bibliotecas/bootstrap/css/bootstrap.css" >
+<link rel="stylesheet" type="text/css" href="../bibliotecas/bootstrap/css/bootstrap-responsive.css" >
+<link rel="stylesheet" type="text/css" href="../bibliotecas/jqueryui/css/ui-lightness/jquery-ui-1.8.20.custom.css"/>
+<script type="text/javascript" src="../bibliotecas/ext-3.4.0/docs/resources/ext-base.js"></script>
+<script type="text/javascript" src="../bibliotecas/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="../bibliotecas/jqueryui/js/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript" src="../AJAXandPHP/JavaScript/functions.js"></script>
+<script type="text/javascript" src="../bibliotecas/ext-3.4.0/ext-all.js"></script>
+
+
+
+
+</head>
+<body>
+<style type="text/css">
+	#idwinmessageboxes td {
+		padding:5px;
+	}
+</style>
+<script type="text/javascript">
+$(function(){
+	$("#accordion").accordion({ header: "h3" }); // No Header se define qual area da div é o titulo;
+});
+/*------------------------------ANIME-------------------------------------*/
+Ext.onReady(function(){
+	var gridanime = new Ext.Panel({
+		title: 'Anime',
+		region: 'center',
+		split: true,
+		width: '50%',
+		collapsible: true,
+		margins:'2 0 2 2',
+		cmargins:'2 0 2 2',
+		layout:'fit',	
+		autoScroll:true,
+		items:[],
+	});
+	
+	var menuanime = new Ext.Panel({
+		title: 'Menu',
+		region:'east',
+		split:true,
+		width:'50%',
+		collapsible:true,
+		margins:'2 2 2 0',
+		cmargins:'2 0 2 2',
+		defaults:{padding: 10},
+	});
+/*------------------------------DVD-------------------------------------*/
+	var griddvd = new Ext.Panel({
+		title:'DVDs',
+		region: 'center',
+		layout:'fit',
+		split:true,
+		collapsible:true,
+		width:'50%',
+		margins:'2 0 2 2',
+		cmargins:'2 0 2 2',
+		autoScroll:true,
+		  items:[],
+	});
+	
+	var menudvd = new Ext.Panel({
+		title:'Menu',
+		region:'east',
+		split:true,
+		width:'50%',
+		collapsible:true,
+		margins:'2 2 2 0',
+		cmargins:'2 0 2 2',
+		defaults:{padding:10},
+	});
+
+
+	
+/*------------------------------------------LOCALIDADES(MAIN)------------------------------------------------*/
+	var tabs = new Ext.Panel({
+		region: 'center',
+		split: true,
+		width: 250,
+		collapsed:false,
+		margins:'2 2 2 2',
+		cmargins:'2 2 2 2',
+		layout:'fit',
+		items:
+		new Ext.TabPanel({
+			margins:'2 2 2 2', 
+			activeTab: 0,
+			height:500,
+			tabPosition:'bottom',
+			autoScroll:false,
+			items:[{
+				title: 'DVDs',
+				layout: 'border',
+		 
+				items:[griddvd, menudvd],
+			},{
+				title: 'Anime',
+				layout: 'border',
+		 
+				items:[gridanime, menuanime],
+			}]
+		})				
+	});
+
+/*----------------------MAIN------------------------------------------------------------------------------*/
+	if(Ext.getCmp('admgeral')){
+		  Ext.getCmp('admgeral')
+	}else{	  
+		var winMain = new Ext.Window({
+		  id:'idwinadministrativogeral',
+		  height:589,
+		  width:1017,
+		  modal:false,
+		  minimizable:true,
+		  maximizable:true,	
+		  minWidth:300,
+		  minHeight:400,
+		  collapsible:true,
+		  plain:true,
+		  split:true,
+		  layout: 'border',
+		  title:'Administrativo Geral',	
+		  tbar:['-',{
+		//---------------------------------------------------------MESSAGEBOXES--------------------------------------------------------------------------------------
+			  text:'MessageBoxes',	
+			  handler:function(){
+				  if(Ext.getCmp('idwinmessageboxes')){
+					  Ext.getCmp('idwinmessageboxes').show();
+				  }else{
+					  var winMessagesBoxes = new Ext.Window({
+						  title:'Message Boxes',
+						  id:'idwinmessageboxes',
+						  height:400,
+						  width:600,
+						  padding:10,
+						  flex:1,
+						  items:[{
+							  xtype:'fieldset',
+							  title:' Message Boxes',
+							  autoHeight:true,
+							  collapsed:false,
+							  layout:'table',
+							  layoutConfig:{columns:2},								  
+							  defaults:{xtype:'button',width:172},
+							  items:[{
+								  text:'Prompt.OKCANCEL',
+								  flex:1,
+								  handler:function(){										  
+									Ext.MessageBox.show({
+										title:'Exemplo de Prompt',
+										msg:'Write some shit here',
+										buttons: Ext.MessageBox.OKCANCEL,
+										prompt:true,
+										fn:function(btn,text,e){
+											if(btn=='ok')
+												Ext.MessageBox.alert('OK', 'Você digitou: '+text);
+											else
+												Ext.MessageBox.alert('CANCELAR', 'Você cancelou!');
+										}
+									})
+								  }
+							  },{
+								  text:'iconQUESTION',
+								  flex:1,
+								  handler:function(){
+									Ext.MessageBox.show({
+										title:'Alert Question',
+										msg:'Question exemple',
+										buttons: Ext.MessageBox.OKCANCEL,
+										icon:Ext.MessageBox.QUESTION,
+										fn:function(btn, a, b, c){
+											
+											console.log(btn, a, b, c);
+											if(btn=='ok')
+												Ext.MessageBox.alert('OK');
+											else
+												Ext.MessageBox.alert('CANCEL');												
+										}
+									})
+								  }
+							  },{
+								  text:'iconERROR',
+								  colspan:2,
+								  width:354,
+								  handler:function(){
+									Ext.MessageBox.show({
+										title:'Alert ERROR',
+										msg:'ERROR exemple',
+										buttons: Ext.MessageBox.OK,
+										icon:Ext.MessageBox.ERROR,
+										fn:function(btn){
+											if(btn=='ok')
+												Ext.MessageBox.alert('OK');
+										}
+									})
+								  }
+							  },{
+								  text:'YESNOCANCEL',
+								  flex:1,
+								  handler:function(){
+									Ext.MessageBox.show({
+									    title: 'Alerta',
+									    msg: 'Este alerta usa 3 botões de escolha!',
+									    width:300,
+									    buttons: Ext.MessageBox.YESNOCANCEL,
+									    fn:function(btn){ 
+								            if(btn == 'yes')
+								                alert('Clicou em OK');
+								            else if(btn == 'no')
+								                alert('Clicou em Não');
+								            else
+								                alert('Clicou em Cancelar');
+								    	}
+									});
+								  }
+							  },{
+								  text:'Multiline',
+								  flex:1,
+								  handler:function(){ Ext.MessageBox.show({
+								      title: 'Comente',
+								      msg: 'Digite seu comentario no campo abaixo:',
+								      width:300,
+								      buttons: Ext.MessageBox.OKCANCEL,
+								      multiline: true,
+								      fn:function(btn,text){ 
+								  
+								            if(btn == 'ok'){
+								                Ext.MessageBox.alert('OK', 'Você digitou: '+text);
+											}
+								            else
+								                alert('Clicou em Cancelar');
+								  
+								    	}
+									});
+								  }
+							  }],
+						  },{
+							  xtype:'form',
+							  id:'validations',
+							  autoHeight:true,
+							  collapsed:false,
+							  padding:10,
+							  items:[{
+								  xtype:'fieldset',
+								  title:' Validations',
+								  height:200,
+								  width:545,
+								  padding:10,
+								  defaults:{xtype:'textfield',width:190},
+								  items:[{
+									  fieldLabel:'CPF',
+									  id:'cpfvalidation',
+									  
+								  }]
+							  }],
+						  }],
+					  }).show();
+				  }
+			  }
+			},'-',{
+///////////////////FORMULARIO CONTATO///////////////////////////////////////////				
+				text:'Simple Form',
+				handler:function(){
+					new Ext.Window({
+						title:"Formulário de Contato",
+						width:550,
+						height:350,
+						items:[
+							new Ext.form.FormPanel({
+						    labelWidth:100,
+						    labelAlign:"left",
+						    layout:"form",
+						    width:'100%',
+							autoHeight:true,
+						    padding:10,
+						    titleCollapse:false,
+						    items:[{
+					            xtype:"fieldset",
+					            title:"Dados Pessoais",
+					            layout:"form",
+					            items:[{
+					                    xtype:"textfield",
+					                    fieldLabel:"Nome",
+					                    anchor:"100%"
+					                },{
+					                    xtype:"textfield",
+					                    fieldLabel:"E-mail",
+					                    anchor:"100%"
+					                },{
+					                    xtype:"textfield",
+					                    fieldLabel:"Telefone",
+					                    anchor:"100%"
+					                }]
+						        },{
+						            xtype:"fieldset",
+						            title:"Contato",
+						            layout:"form",
+									buttonAlign:'center',
+						            items:[{
+					                    xtype:"textarea",
+					                    fieldLabel:"Mensagem",
+					                    anchor:"100%"
+					                }],
+									buttons:[{
+					                    xtype:"button",
+					                    text:"Enviar Contato",
+					                    margins:""						            
+							        }]	
+								}],				        
+							})
+						]
+					}).show();
+				}
+			},'-',{
+///////////////////////////////////////layout: Boxes////////////////////////////////////////////////////////
+				text:'layout: Boxes',
+				menu:[{
+					text:'Hbox',
+					handler:function(){
+						new Ext.Window({
+							title:"Exemplo de Layout HBox",
+							width:600,
+							height:250,
+							layout:"hbox",
+							items:[{
+								xtype:"panel",
+								title:"Flex 1",
+								flex:1,
+								autoHeight:true,
+								html:"<h3>Jotaquery o maior portal de javascript do Brasil.</h3><p>item1</p><p>item2</p>"
+							},{
+								xtype:"panel",
+								title:"Flex 1",
+								flex:1,
+								autoHeight:true,
+								html:"<h3>Jotaquery o maior portal de javascript do Brasil.</h3><p>item1</p><p>item2</p>"
+							}]
+						}).show();
+					}
+				},{
+					text:'Vbox',
+					handler:function(){
+						new Ext.Window({
+							title:"Exemplo de Layout VBox",
+							width:600,
+							height:250,
+							layout:"vbox",
+							items:[{
+									xtype:"panel",
+									title:"Flex 1",
+									flex:1,
+									autoHeight:false,
+									html:"Jotaquery o maior portal de javascript do Brasil.Jotaquery o maior portal de javascript do Brasil",
+									autoWidth:true
+								},{
+									xtype:"panel",
+									title:"Flex 1",
+									flex:1,
+									autoHeight:false,
+									autoWidth:true,
+									html:"Jotaquery o maior portal de javascript do Brasil."
+								}
+							]
+						}).show();
+					}
+				}]
+			},'-',{
+//////////////////////////////////////////////LOGIN///////////////////////////////////////////////
+				text:'Login',
+				handler:function(){
+					var windowLoginSimples = new Ext.Window({
+						title: "Login Simples",
+						width: 350,
+						height: 140,
+						items: [{
+							xtype: "form",
+							id:"windowLoginSimples_form",
+							labelWidth: 100,
+							labelAlign: "left",
+							layout: "form",
+							autoHeight: true,
+							padding: "10",
+							defaults: {
+								xtype: "textfield",
+								anchor: "100%",
+								allowBlank:false
+							},
+							items: [{
+								fieldLabel: "Login",
+								name:"login"
+							},{
+								fieldLabel: "Senha",
+								inputType: "password",
+								name:"senha"
+							}]
+						}],
+						buttons:[{
+							text:'Cancelar',
+							handler:function(){
+								windowLoginSimples.close();    //Linha responsável por fechar a janela e cancelar o login.
+							}
+						},{
+							text:'Ok',
+							handler:function(){
+								if(Ext.getCmp('windowLoginSimples_form').getForm().isValid()){ //Verificando se o form é válido
+				
+									Ext.getCmp('windowLoginSimples_form').getForm().submit({
+										url: 'enviar.php',
+										success: function(form, action) {
+										//Irá executar esta função quando o success for igual a: true
+										Ext.Msg.alert('Resposta', action.result.msg);//Mensagem personalizada da página "enviar.php"
+										},
+										failure: function(form, action) {
+											//Irá executar esta função quando o success for igual a: false
+											switch (action.failureType) {
+												case Ext.form.Action.CLIENT_INVALID:
+													Ext.Msg.alert('Falha', 'Formulario enviado com dados invalidos');
+													break;
+												case Ext.form.Action.CONNECT_FAILURE:
+													Ext.Msg.alert('Falha', 'Falha na comunicacao');
+													break;
+												case Ext.form.Action.SERVER_INVALID:
+												Ext.Msg.alert('Falha', action.result.msg);//Erro personalizado na página "enviar.php"
+											}
+										}
+									});
+				
+								}
+							}
+						}]
+					});
+					windowLoginSimples.show();
+				}
+			},'-',{
+				text:'EXT foreach',
+				handler:function(){
+					var array = Array('Banana','Maça','Abacaxi','Goiaba','Pera');
+
+					Ext.each(array, function(item, index, todosItens){
+									
+						alert('Item: '+item+'\nIndex: '+index+'\nArray: '+todosItens);
+					});
+				}
+			}],
+		  
+			items: [tabs],	
+							 
+		}).show();
+	}
+});
+</script>
+</body>
+</html>
+
+
+
+
+

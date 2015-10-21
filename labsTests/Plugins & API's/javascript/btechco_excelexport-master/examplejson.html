@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/jquery-2.0.1.min.js"></script>
+    <script src="Scripts/jquery.btechco.excelexport.js"></script>
+    <script src="Scripts/jquery.base64.js"></script>
+</head>
+<body>
+    <div id="dvjson">
+    </div>
+    <div>
+        <button id="btnExport">Export</button>
+    </div>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $("#btnExport").click(function () {
+            var dataobj = [
+                { id: 1, fname: "Mark", lname: "Otto", uname: "@mdo", dt: "1/1/2013" }
+                , { id: 2, fname: "Jacob", lname: "Thornton", uname: "@fat", dt: "1-Jan-2013" }
+                , { id: 3, fname: "Larry", lname: "the Bird", uname: "@twitter", dt: "2013/12/01" }
+            ];
+
+            $("#dvjson").btechco_excelexport({
+                containerid: "dvjson"
+                , datatype: $datatype.Json
+                , dataset: dataobj
+                , columns: [
+                    { headertext: "S.No.", datatype: "number", datafield: "id", ishidden: false }
+                    , { headertext: "First Name", datatype: "string", datafield: "fname", width: "100px" }
+                    , { headertext: "Last Name", datatype: "string", datafield: "lname", ishidden: false, width: "100px" }
+                    , { headertext: "Username", datatype: "string", datafield: "uname", ishidden: true }
+                    , { headertext: "Date", datatype: "date", format: "xxxx,xx", datafield: "dt", ishidden: false, width: "150px" }
+                ]
+            });
+        });
+    });
+</script>

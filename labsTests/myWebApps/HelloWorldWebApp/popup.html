@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8"> 
+            <style type="text/css">
+				body *{
+					font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+				}
+				#main{
+					width:400px;
+					height:200px;
+				}
+				#button-group{
+					position:relative;
+					width:300px;
+					margin:0 auto;
+				}
+				#cronometer{
+					margin:0 auto;
+				}
+				.mybtn {
+					display: inline-block;
+					height:20px;
+					width:74px;
+					padding: 4px 10px 4px;
+					margin-bottom: 0;
+					font-size: 13px;
+					line-height: 18px;
+					color: #333333;
+					text-align: center;
+					text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+					vertical-align: middle;
+					cursor: pointer;
+					background-color: #f5f5f5;
+					background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+					background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
+					background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+					background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+					background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+					background-image: linear-gradient(top, #ffffff, #e6e6e6);
+					background-repeat: repeat-x;
+					filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+					border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+					border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+					filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+					border: 1px solid #cccccc;
+					-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+					-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+					box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+				}
+            </style>
+            <script type="text/javascript" src="jquery-1.8.3.js"></script>
+			<script type="text/javascript" src="popup.js"></script>
+       </head>
+    <body>
+    	<div id=main style="background:#9CF;">  
+    		<h2 align="center">MY FIRST WEB APP!</h2>
+            <div id="button-group">
+                <a class="mybtn" id="start">START</a>
+                <a class="mybtn" id="pause">PAUSE</a>
+                <a class="mybtn" id="restart">RESTART</a>
+            </div>
+            <div id="cronometer">
+            </div>
+        </div>
+    </body>
+</html>

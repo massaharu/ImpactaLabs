@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="author" content="Massaharu"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WEB PAGE /></title>
+<link rel="stylesheet" type="text/css" href="css\estilos.css" />
+<link rel="stylesheet" type="text/css" href="..\..\bibliotecas\animate.css"/>
+<script type="text/javascript" src="..\..\bibliotecas\jquery-1.7.1.js"></script>
+<script type="text/javascript" src="js scripts\jscript.js"></script>
+</head>  
+
+<body onload="startTime()">	
+<!--Retorno do link interno-->
+	<a name="voltar">
+	<!--Títulos-->
+	<div id="titulos">
+    </div>
+	<div>
+		<h1 id="title" class="title01"><a href="index.html" target="_top">First Web Page</a></h1>
+		<h2 class="title2">Página de Teste</h2>               
+    </div>
+    
+    <div id="time" class="title2" style="color:#036;text-align:center;font-weight:bold">
+    </div>
+    
+	<div id="allPage">
+	<!-- Listagem-->
+		<h1 class="title1 parent" id="listas1">LISTAS</h1>
+		<div id="listas"  class="fechavel">    
+			<ol>
+				<li class="parent">ITEM</li>
+					<ul class="fechavel">
+	  			  		<li> subitem </li>
+		  		 	   	<li> subitem </li>
+	        			<li> subitem </li>
+     				</ul>
+				<li class="parent">ITEM</li>
+					<ul class="fechavel">
+						<li> subitem</li>
+        				<li> subitem</li>
+        				<li> subitem</li>
+    				</ul>
+				<li class="parent">ITEM</li>
+					<ul class="fechavel">
+						<li> subitem</li>
+        				<li> subitem</li>
+        				<li> subitem</li>
+    				</ul>
+			</ol>
+ 	   </div><hr />
+        
+		<div id="helloworld" class="parent">		
+			<span id="hello" class="fechavel">Hello World!</span><hr />
+		</div>
+   	
+	    <h1 class="title1 parent" id="gag">9GAG</h1>
+        <div class="fechavel">
+	    	<div id="imagem1" >
+	    		<a href="http://www.9gag.com" target="_blank"><img src="css\images\9gag.jpg" alt="Just For Fun!" width="350" height="220" /></a></div>    
+	    	<div id="_9gagtext" class="fechavel">
+	    		<p>9gag (stylized as 9GAG) is a comedy website hosted in the United States. Launched in 2008[3], it soon became a website known to many browsers around the world. This website is best known for the recurring use of internet memes, which originate from other sites and its many users. Content and style.</p>
+				<p>Any registered user can upload 'gags'. A gag is an image of (usually) humorous nature. Once available, these images go through a vote, on the section of the website entitled "Vote". On the "Vote" page, a user may like, dislike or comment on a gag. If a gag receives enough votes, it then moves to a section called "Trending", where users can still like, dislike or comment on the gag. If a gag gets enough positive votes (or likes) on the "Trending" page, it will then appear on the main "Hot" page. On the "Hot" page, the users can like the post or comment on it only, the post will no longer be able to be disliked.</p><br />
+   			</div>
+        </div><hr />
+        
+		<!--Linkagem externa-->	
+		<h1 class="title1 parent" id="links">LINKS</h1>
+  	    <div id="divLinks" class="fechavel">   	 
+			<ol>
+    	    	<li><input type="button" value="Page 2" onclick="verifyPage2()" /></li>
+    	    	<li><a href="..\First Web Page\link2.html">Page 3</a></li>
+		<!--Linkagem de uma mesma página(Redirecionamento interno)-->
+				<li><a href="#Google"> Go to Google</a><br /></li>
+				<li><a href="#Facebook"> Go to Facebook</a><br /></li>        
+    		</ol>
+  	    </div><hr />
+		<!--Tabelas-->
+		<h1 class="title1 parent" id="tabela">TABELAS</h1>
+		<div id="tabela1" class="fechavel">
+    		<table>
+    			<tr>
+     		   		<td align="center" colspan="3"><img src="css\images\site_internet.jpg" width="637" height="200"/></td>            
+    			<tr>                                                                
+    				<td><a href="http://www.9gag.com" target="_blank"><br /> <img src="css\images\9gag.jpg" width="150" height="90" /> </a></td>
+     	   			<td><a href="http://www.facebook.com"target="_blank"> <img src="css\images\facebook.png" width="130" height="130" /></a></td>
+     	   			<td><a href="http://www.google.com"target="_blank"> <img src="css\images\google.jpg" width="150" height="110" /> </a></td>
+    			<tr>
+    				<td><a href="http://www.apple.com.br"target="_blank"> <img src="css\images\apple.png" width="150" height="150"/></a></td>
+     	   			<td><a href="http://www.yahoo.com.br"target="_blank"> <img src="css\images\yahoo.jpg" width="150" height="150"/></a></td>
+     	  			<td><a href="http://www.microsoft.com.br"target="_blank"> <img src="css\images\microsoft.png" width="150" height="150"/></a></td>
+   		 		<tr>
+    				<td><a href="http://thepiratebay.se/"target="_blank"> <img src="css\images\thepiratebay.jpg" width="150" height="150"/></a></td>
+     	   			<td><a href="http://www.w3schools.com"target="_blank"> <img src="css\images\w3schools_pic.png" width="150" height="150"/></a></td>
+        			<td><a href="http://www.youtube.com"target="_blank"> <img id="img_youtube" src="css\images\youtube.png" width="150" height="150"/></a></td>
+   			</table><br/>
+     	</div><hr />
+<		<!--formulários-->
+		<h1 id="formulario" class="title1 parent">FORMULÁRIO</h1>
+		<div id="form" class="fechavel">    	
+			<form action="" method="">    		
+				<label>Nome: </label>
+    				<input type="text" name="name" placeholder="Insira seu nome..."/><br/><br/>
+    			<label>Senha:</label>
+    				<input type="password" name="pass" placeholder="Insira sua senha"/><br/><br/>
+    			<label>Sexo:</label>
+    				<input type="radio" name=sexo value="masculino" />Masculino</label>
+    				<input type="radio" name=sexo value="feminino" />Feminino</label><br/><br/>
+    			<label>Cursos:</label>
+   		 			<input type="checkbox" name="cursos" value="php" />PHP</label>
+   		 			<input type="checkbox" name="cursos" value="java" />JAVA</label></form><br/><br/>
+    			<label>Arquivo:</label>
+    				<input type="file" name="arquivo" /><br/><br/>
+    			<label>Estado:</label>
+    				<select name="estados" size="4"> 
+<					<!--(Size) define quantos valores que aparecerão no Box-->            
+        				<option value="sp">São Paulo</option>
+            			<option value="rj">Rio de Janeiro</option>
+            			<option value="mg">Minas Gerais</option>
+           				<option value="rs">Rio Grande do Sul</option>
+            			<option value="pr">Paraná</option>
+        			</select><br /><br />
+    			<label>Música</label>
+    				<select name="musica" size="4" multiple>
+        				<option value="rock">Rock</option>
+           				<option value="pop">Pop</option>
+            			<option value="country">Country</option>
+            			<option value="blues">Blues</option>
+            			<option value="soul">Soul</option>
+        			</select><br />
+        				Escolha um ou mais.<br /><br />
+    			<label>Comentários:</label>    
+    				<textarea name="comentario"  placeHolder="Deixe um comentário..." ></textarea><br/><br/>    
+                <label>Enviar:</label>
+    				<input type="submit" name="enviar" value="Enviar"/>
+    			<label>Reset:</label>
+    				<input type="reset" name="limpar" value="Limpar" />
+			</form>
+		</div><hr />
+    
+    	<h1 id="interações1" class="title1 parent">INTERAÇÕES</h1>
+    	<div id="interações" class="fechavel">    	
+        	<form name="formInt">
+        		<p id="demo">Clique no botão "Display Date" abaixo para ver a data e horário atual.</p>            
+				<input type="button" value="Display Date" onclick="displayDate()" name="Date" />
+            	<input type="button" value="Compliments" onClick="cumprimentos()" name="congrats" /><br /><br />
+            	<input type="button" value="Seu nome" onclick="getYourName()" name="getName" /> 
+            	<input type="text" name="yourName" readonly="readonly" placeholder="Aqui vai seu nome..." /><br /><br />
+            	<input type="text" name="texto1" placeholder="Digite algo aqui..."/><br />
+    			<input type="button" value="Enviar" onclick="enviar()" /> 
+            <!--calcular-->
+           	 	<h2>Calculadora</h2>                      
+            	<input type="text" name="num1" placeholder="1st number..." /><br />
+            	<input type="text" name="num2" placeholder="2nd number..." /> =
+            	<input type="text" name="resp" readonly="readonly"  placeholder="Resposta..." /><br />
+             	<label><input type="radio" name="operation" value="mais" onclick="plus()"/>+</label>
+             	<label><input type="radio" name="operation" value="menos" onclick="subt()"/>-</label><br />
+             	<label><input type="radio" name="operation" value="mul" onclick="mult()"/>X</label>
+             	<label><input type="radio" name="operation" value="div" onclick="divi()"/>÷</label><br />
+				<input type="button" value="Calcular" onclick="calc()"/> <!--Nunca nomear um "button" igual ao nome da função-->
+            	<input type="button" value="Apagar" onclick="resetar()" /><br /><br />
+            <!------------------------------------------------------------------------------->
+         	</form>
+    	</div><hr />
+   	<!--Linkagem de uma mesma página(Redirecionamento interno)-->	
+    	<div id="goto">
+			<a name="Google">
+				<a href="http://www.google.com" target="_blank"><br /><img src="css\images\google.jpg" "width="150" height="40" ></a>
+			<a name="Facebook">
+				<a href="http://www.facebook.com" target="_blank"><img src="css\images\facebook.png" width="50" height="50"/></a><br />
+			<p><i><a href="#voltar">Ir ao topo</a></i></p>
+		</div>
+	</div>
+    <button id="hidePage">Toggle page (Hide/Show)</button>
+    <button id="showPage">Show</button>
+</body>
+</html>
+
+ 
+ 
+ 
+ 
+ 

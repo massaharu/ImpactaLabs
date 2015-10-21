@@ -1,0 +1,768 @@
+////////////////////////////////////////////////////////////////////////////////////
+///////////////// EXEMPLO AJAX JQUERY ////////////////////////////////
+$.ajax({
+	url: 'json/list_turmas_prof.php',
+	type: 'POST',
+	dataType: 'json',
+	data:{
+		data: data	
+	},
+	success: function(retorno){
+	}
+})
+////////////////// EVAL JAVASCRIPT ///////////////////////////////////////////
+<?
+session_start();
+$sessionidusuario = $_SESSION["idusuario"];
+echo($sessionidusuario);
+?>
+
+'render':function(){
+	Ext.Ajax.request({
+		url: "/simpacweb/labs/Massaharu/extjsTelas/16.AvalFinal_locacoes/AvalFinal_locacoes_phpfile.php",
+		success: function(retorno){
+			eval("var sessionidusuario = "+retorno.responseText+";");
+			if(sessionidusuario == 1495){
+				Ext.getCmp('button_final_locacao').show();
+			}else{
+				Ext.getCmp('button_final_locacao').hide();
+			}
+		}
+	});
+}
+////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////COMBO DIN¬MICO EXTJS///////////////////////////////////////
+//COMBO DIN¬MICO PARA ANO
+	var data = new Date();
+	var ano = [];
+	var anos = [];
+	var index = 0;
+	var arr = new Array();
+	for(var i = 2012;i < data.getFullYear()+1;i++){
+		ano = [i,i+""];
+		anos[index] = ano;			
+		index++;			
+	}
+	var myData = anos;
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////AJAX EXTJS///////////////////////////////////////
+Ext.Ajax.request({
+	url:'/simpacweb/modulos/RH/solicitacaoBolsaEstudos/json/usuarioDados_get.php',
+	params:{
+			idnomecolaborador:xt('idnomecolaborador').getValue()
+	},
+	success:function(response){
+		console.log(Ext.util.JSON.decode(response.responseText).myData[0]);
+
+	}
+});
+////////////////////////////////////////////////////////////////////////////////
+///////////////// MASK CPF /////////////////////////////////////////////////////
+
+// PHP
+function maskCPF($nrcpf){
+	return substr($nrcpf, 0, -8).'.'.substr($nrcpf, 3, -5).'.'.substr($nrcpf, 6, -2).'-'.substr($nrcpf, -2);
+}
+//JAVASCRIPT
+function fn_maskCPF(cpf){
+	return cpf.substring(0, 3)+'.'+cpf.substring(3, 6)+'.'+cpf.substring(6, 9)+'-'+cpf.substring(9);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+/////////////////// MY DATA FUNCTIONS////////////////////////////////////////////
+
+
+var myDate = function(){
+	
+	this.dataRetorno = "";
+}
+Date.getDataExtenso = function(data){
+
+	var dia = "";
+	var mes = "";
+	var ano = "";
+	var semana = "";
+	var html = "";
+		
+	if(data.getDate() < 10){
+		dia = "0"+data.getDate().toString();
+	}else{			
+		dia = data.getDate().toString();
+	}
+	
+	switch(data.getDay()){
+		case 0: semana = "Domingo"; break;
+		case 1: semana = "Segunda-Feira"; break;
+		case 2: semana = "TerÁa-Feira"; break;
+		case 3: semana = "Quarta-Feira"; break;
+		case 4: semana = "Quinta-Feira"; break;
+		case 5: semana = "Sexta-Feira"; break;
+		case 6: semana = "S·bado"; break;
+	}
+	
+	switch(data.getMonth()){
+		case 0: mes = "Janeiro"; break;
+		case 1: mes = "Fevereiro"; break;
+		case 2: mes = "MarÁo"; break;
+		case 3: mes = "Abril"; break;
+		case 4: mes = "Maio"; break;
+		case 5: mes = "Junho"; break;
+		case 6: mes = "Julho"; break;
+		case 7: mes = "Agosto"; break;
+		case 8: mes = "Setembro"; break;
+		case 9: mes = "Outubro"; break;
+		case 10: mes = "Novembro"; break;
+		case 11: mes = "Dezembro"; break;
+	}
+	
+	ano = data.getFullYear();
+	
+	html =  
+	"<div>"+
+		"<div class='dia'>"+dia+"</div>"+
+		"<div>"+
+			"<div class='semana'>"+semana+"</div>"+
+			"<div class='mes'>de "+mes+" de "+ano+"</div>"+
+		"</div>"+
+	"</div>";
+	
+	return html;
+};
+Date.getDataPadraoDia = function(data){
+		
+	if(data.getDate() < 10){
+		dataRetorno = "0"+data.getDate()+"/".toString();
+	}else{			
+		this.dataRetorno = data.getDate()+"/".toString();
+	}
+	
+	if(data.getMonth() < 9){
+		dataRetorno+= "0"+(data.getMonth()+1)+"/".toString();
+	}else{
+		dataRetorno+= (data.getMonth()+1)+"/".toString();
+	}
+	
+	dataRetorno+= data.getFullYear();
+	
+	return dataRetorno;	
+}
+
+Date.getDataPadraoDiaHora = function(data){
+
+	if(data.getDate() < 10){
+		dataRetorno = "0"+data.getDate()+"/".toString();
+	}else{			
+		dataRetorno = data.getDate()+"/".toString();
+	}
+	
+	if(data.getMonth() < 9){
+		dataRetorno+= "0"+(data.getMonth()+1)+"/".toString();
+	}else{
+		dataRetorno+= (data.getMonth()+1)+"/".toString();
+	}
+	
+	dataRetorno+= data.getFullYear()+" ";
+	
+	if(data.getHours() < 10){
+		dataRetorno+= "0"+(data.getHours())+":".toString();
+	}else{
+		dataRetorno+= (data.getHours())+":".toString();
+	}
+	
+	if(data.getMinutes() < 10){
+		dataRetorno+= "0"+(data.getMinutes())+":".toString();
+	}else{
+		dataRetorno+= (data.getMinutes())+":".toString();
+	}
+	
+	if(data.getSeconds() < 10){
+		dataRetorno+= "0"+(data.getSeconds()).toString();
+	}else{
+		dataRetorno+= (data.getSeconds()).toString();
+	}
+	
+	return dataRetorno;
+}
+
+Date.getHora = function(data){
+	var dataRetorno = "";
+	
+	if(data.getHours() < 10){
+		dataRetorno+= "0"+data.getHours()+":".toString();
+	}else{			
+		dataRetorno+= data.getHours()+":".toString();
+	}
+	
+	if(data.getMinutes() < 10){
+		dataRetorno+= "0"+data.getMinutes().toString();
+	}else{			
+		dataRetorno+= data.getMinutes().toString();
+	}
+	
+	return dataRetorno;
+}
+
+Date.getDataSql = function(data){
+
+	dataRetorno = data.getFullYear()+"-";
+	
+	if(data.getMonth() < 9){
+		dataRetorno+= "0"+(data.getMonth()+1)+"-".toString();
+	}else{
+		dataRetorno+= (data.getMonth()+1)+"-".toString();
+	}
+	
+	if(data.getDate() < 10){
+		dataRetorno+= "0"+data.getDate().toString();
+	}else{			
+		dataRetorno+= data.getDate().toString();
+	}
+	return dataRetorno;
+
+}
+
+Date.getDataNumber = function(data){
+
+	dataRetorno = data.getFullYear()+"";
+	
+	if(data.getMonth() < 9){
+		dataRetorno+= "0"+(data.getMonth()+1).toString();
+	}else{
+		dataRetorno+= (data.getMonth()+1).toString();
+	}
+	
+	if(data.getDate() < 10){
+		dataRetorno+= "0"+data.getDate().toString();
+	}else{			
+		dataRetorno+= data.getDate().toString();
+	}
+	
+	dataRetorno = parseInt(dataRetorno);
+	
+	return dataRetorno;
+}
+
+Date.addDays = function(obj) {
+	return new Date(obj.Data.setDate(obj.Data.getDate() + obj.dias));  
+};
+Date.subDays = function(obj) {
+	return this.setDate(obj.Data.getDate() - obj.dias);  
+};
+Date.strtotime = function(dateStr){
+	var data = dateStr.split("/");
+		
+	if(data.length  < 3) data = dateStr.split("-");
+		
+	return new Date(data[2], data[1]-1, data[0]);
+}
+
+
+___
+Ex: Date.getDataNumber(new Date());
+ 
+////////////////////////////////////////////////////////////////////////////////
+/////////////////// EXPRESS√O REGULAR ////////////////
+
+var str = "05/12/2013";
+var regex = new RegExp('/','g');
+str.replace(regex, '-'); //Troca todos as "/" por "-"
+
+.replace(/(\r\n|\n|\r)/gm,""); // remove as quebras de linha
+
+//CPF
+function check_cpf( string )
+{
+	var novoCPF = string.replace(/[\.-]/g, "");
+	alert( novoCPF );
+	return novoCPF;
+}
+
+/////////////////////////////////////////////////////////////////////////////////
+//////////////////// Contagem regressiva para tela de pontos/////////////////////
+
+function formatatempo(segs) {
+	if (segs < 10) {segs = "0"+segs}
+	
+	fin = segs
+	
+	return fin;
+}
+
+var segundos = 900; //inicio do cronometro
+
+function conta() {
+	segundos--;
+	if(segundos == 0){
+
+		$(".center button:contains('SaÌda Pausa')").click();
+		zera();
+	}
+	$('.myponto').html('<div style="font-size:9px;color:rgb(169, 202, 250);" class="xtb-text x-status-text " id="ext-comp-1143">'+formatatempo(segundos)+'</div>')
+	//$('#topo p:last').next().html(formatatempo(segundos));
+	//$('.table-hour').prev().html("<span style='font-size:40px'>"+formatatempo(segundos)+'</span>')
+}function inicia(){
+	$('#simpacwebrelogio').parent().parent().prepend('<td class="x-toolbar-cell myponto" id="ext-gen121"></td>');
+	//$('#topo p:last').after('<div></div>')
+	interval = setInterval("conta();",1000);
+}
+
+function para(){
+	clearInterval(interval);
+}
+
+function zera(){
+	clearInterval(interval);
+	segundos = 0;
+	$('.myponto').html('<div style="font-size:9px;color:rgb(169, 202, 250);" class="xtb-text x-status-text " id="ext-comp-1143">'+formatatempo(segundos)+'</div>')
+	//$('#topo p:last').next().html(formatatempo(segundos));
+	//$('.table-hour').prev().html("<span style='font-size:40px'>"+formatatempo(segundos)+'</span>');
+}
+/////////////////////////////////////////////////////////////////////////////////
+///////////////////// Enviando array de Objeto por AJAX /////////////////////////
+
+/* ARQUIVO JS */
+var $myObjArray;
+
+$.each($value, function(){
+  $nome = this.nome;
+  $idade = this.idade; 	
+
+  var $myArray = {
+     'nome' : $nome,
+     'idade' : $idade 	
+  }
+
+  $myObjArray.push($myArray);
+});
+
+$.ajax({
+  url:'path/url.xxx',
+  params:{
+     myobj: JSON.stringify($myObjArray)
+  }
+  success: function(){
+  }	
+
+})
+
+/* ARQUIVO PHP */
+$myobj = post('myobj');
+
+$myobj = json_decode($myobj);
+
+foreach($myobj as $key=>$value){
+  $nome = $value->nome;
+  $idade = $value->idade
+}
+/////////////////////////////////////////////////////////////////////////////////
+//////////////// ESQUEMA DATAS (DE: , AT…: )////////////////////////////////////
+
+{
+					xtype:'datefield',
+					fieldLabel:'De',
+					id:'dfadmdescontode',
+					hidden: true,
+					width:150,
+					listeners:{
+						'select': function(){
+							var $dateDe = xt('dfadmdescontode').getValue();
+							var $dateAte = xt('dfadmdescontoate').getValue();
+							
+							if($.trim($dateAte) == "") return false; 
+							
+							if(Date.getDataNumber($dateDe) > Date.getDataNumber($dateAte)){
+								xt('dfadmdescontoate').setValue($dateDe);
+							}
+						}
+					}
+				},{
+					xtype:'datefield',
+					fieldLabel:'AtÈ',
+					width:150,
+					id:'dfadmdescontoate',
+					hidden: true,
+					listeners:{
+						'select': function(){
+							var $dateDe = xt('dfadmdescontode').getValue();
+							var $dateAte = xt('dfadmdescontoate').getValue();
+							
+							if($.trim($dateDe) == "") return false; 
+							
+							if(Date.getDataNumber($dateAte) < Date.getDataNumber($dateDe)){
+								
+								xt('dfadmdescontode').setValue($dateAte);
+							}
+						}
+					}
+				}
+
+function fn_reloadStoreArquivoRetornoByData(dtinicio, dtfinal){
+	
+	storesolicitacaocorporativa.reload({
+		params:{
+			dtinicio:dtinicio,
+			dtfinal:dtfinal
+		}
+	});
+}
+//////////////////////// CRIACAO OBJETOS (JAVASCRIPT) //////////////
+///////////////////////////////////////////////////////////////////
+var pessoa = (function(args){
+	var self = this;
+	var nome;
+	var idade;
+	
+	var __construct = (function() {
+		return args;
+	});
+	
+	self.toString = (function(){
+		return "bl· lb· bl·";
+	});
+	
+	__construct();
+});
+
+
+new pessoa({
+	width: 100
+});
+/////////////////////// JAVASCRIPT BASE64_decode //////////////////////////////////////
+function base64_decode(data) {
+	var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+	var o1, o2, o3, h1, h2, h3, h4, bits, i = 0,
+	ac = 0,
+	dec = "",
+	tmp_arr = [];
+	
+	if (!data) {
+		return data;
+	}
+	
+	data += '';
+	
+	do { // unpack four hexets into three octets using index points in b64
+		h1 = b64.indexOf(data.charAt(i++));
+		h2 = b64.indexOf(data.charAt(i++));
+		h3 = b64.indexOf(data.charAt(i++));
+		h4 = b64.indexOf(data.charAt(i++));
+		
+		bits = h1 << 18 | h2 << 12 | h3 << 6 | h4;
+		
+		o1 = bits >> 16 & 0xff;
+		o2 = bits >> 8 & 0xff;
+		o3 = bits & 0xff;
+		
+		if (h3 == 64) {
+		  tmp_arr[ac++] = String.fromCharCode(o1);
+		} else if (h4 == 64) {
+		  tmp_arr[ac++] = String.fromCharCode(o1, o2);
+		} else {
+		  tmp_arr[ac++] = String.fromCharCode(o1, o2, o3);
+		}
+	} while (i < data.length);
+	
+	dec = tmp_arr.join('');
+	
+	return dec;
+}
+/////////////////////////// Javascript Get function //////////////////////////
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+////////////////////////////// JAVASCRIPT  OUT ///////////////////////////////////////////////
+function out($query_string){
+	
+	var $t = base64_decode($query_string);
+	var $len = $t.substr(0,3);
+	
+	return base64_decode($t.substr(Number($len)+3, (Number($t.length)) - (Number($len)+3)));
+}
+////////////////////////////// FORMAT CURRENCY (JAVASCRIPT) ////////
+// Money
+function formatCurrency(num)
+{
+    num = num.toString().replace(/\$|\,/g, '');
+    if (isNaN(num))
+    {
+        num = "0";
+    }
+
+    sign = (num == (num = Math.abs(num)));
+    num = Math.floor(num * 100 + 0.50000000001);
+    cents = num % 100;
+    num = Math.floor(num / 100).toString();
+
+    if (cents < 10)
+    {
+        cents = "0" + cents;
+    }
+    for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
+    {
+        num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+    }
+
+    return (((sign) ? '' : '-') + 'R$ ' + num + '.' + cents);
+}
+
+//Simplified
+function formatCurrency(num) {
+    num = isNaN(num) || num === '' || num === null ? 0.00 : num;
+    return parseFloat(num).toFixed(2);
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// HEIGHT RESPONSIVE /////////////////////////////////////////////////////////////////////////
+//ONRESIZE
+	responsiveHeight('.container.main');
+	function responsiveHeight(divElement){
+		
+		var screenHeight = screen.height - 126;
+		var divHeight = $(".container.main").height();
+		
+		var $height = $(window).height() - (screenHeight - divHeight);
+		
+		$(window).resize(function(){
+			
+			$height = $(window).height() - (screenHeight - divHeight);
+			$(divElement).css({
+				'max-height' : $height+'px',
+				'height' : 'auto'
+			});
+		});
+		
+		$(divElement).css({
+			'max-height' : $height+'px',
+			'height' : 'auto'
+		});
+	}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////// VALIDA CAMPOS DE FORMULARIO ////////////////////////////////////////////////////
+ex:
+validFormFields({
+   idEl : "#idelemento",
+   idLabelEl : "#idlabelelemento",
+   foco : false, //optional, defaults to false
+   regex : "^([A-Z,a-z,0-9,_,-]){3,100}$", //optional
+});
+
+
+function validFormFields(args){
+	
+	var valor = $(args.idEl).val();
+	var retorno = false;
+	
+	if(typeof(args.regex) !== "undefined"){
+		
+		if(valor.match(args.regex)){
+			
+			$(args.idEl).css({
+				"color":"#007C00",
+				"border-color":"#007C00"
+			});
+			
+			$(args.idLabelEl).css("color","#007C00");
+			
+			retorno = true;
+		}else{
+			
+			$(args.idEl).css({
+				"color":"#CF0000",
+				"border-color":"#CF0000"
+			});
+			
+			$(args.idLabelEl).css("color","#CF0000");
+			
+			retorno = false;
+			//alert('Digite no mÌnimo 3 letras e somente n˙meros, letras, - , _' );
+	
+			if(typeof(args.foco) !== "undefined" && args.foco === true){
+				$(args.idEl).focus();
+			}
+		}
+		
+		return retorno;
+	}else{
+		
+		if(valor == ""){
+			
+			$(args.idEl).css({
+				"color":"#CF0000",
+				"border-color":"#CF0000"
+			});
+			
+			$(args.idLabelEl).css("color","#CF0000");
+			
+			if(typeof(args.foco) !== "undefined" && args.foco === true){
+				$(args.idEl).focus();
+			}
+			
+			retorno = false;
+		}else{
+			
+			$(args.idEl).css({
+				"color":"#555",
+				"border-color":"rgb(209, 205, 205)"
+			});
+			
+			$(args.idLabelEl).css("color","#555");
+			
+			retorno = true;
+		}
+		
+		return retorno;	
+	}
+}
+/////////////////////////////// MANIPULANDO <IFRAME> ///////////////////////////////////////////////////////////////////
+//from outside of the <iframe>
+$('iframe').contents().find('.login').text('OI')
+
+//from inside of the iframe
+parent.document
+  //jquery
+  $('div.modal-backdrop', window.parent.document);
+/////// PADR√O CLASSES JS //////////////////////////////////////////////////////////////////////////////////////
+var Obj = function(args){
+	var self = this;
+	var string;
+	var number;
+
+	var construct = function(){
+		string = args.string;
+		number = args.number;
+	}
+
+	self.getInstancia = function(){
+		return {
+			string : self.getString(),
+			number: number
+		}
+	}
+
+	self.setString = function($string){
+		string = (typeof($string) == "undefined")? "" : $string;
+	}
+
+	self.getString = function(){
+		return string;
+	}
+
+	if(typeof(args) != "undefined") construct();
+
+}
+/////////////////////////////////// REMOVE ACCENT ///////////////////////////////////////////////////
+function removeAccents(strAccents){
+    strAccents = strAccents.split('');
+    strAccentsOut = new Array();
+    strAccentsLen = strAccents.length;
+    var accents = '¿¡¬√ƒ≈‡·‚„‰Â“”‘’’÷ÿÚÛÙıˆ¯»… ÀËÈÍÎ«Á–ÃÕŒœÏÌÓÔŸ⁄€‹˘˙˚¸—Òäöüˇ˝éû¥`~^®';
+    var accentsOut = ['A','A','A','A','A','A','a','a','a','a','a','a','O','O','O','O','O','O','O','o','o','o','o','o','o','E','E','E','E','e','e','e','e','e','C','c','D','I','I','I','I','i','i','i','i','U','U','U','U','u','u','u','u','N','n','S','s','Y','y','y','Z','z','', '', '', '', ''];
+    for (var y = 0; y < strAccentsLen; y++) {
+        if (accents.indexOf(strAccents[y]) != -1) {
+            strAccentsOut[y] = accentsOut[accents.indexOf(strAccents[y])];
+        }
+        else
+            strAccentsOut[y] = strAccents[y];
+    }
+    strAccentsOut = strAccentsOut.join('');
+    return strAccentsOut;
+}
+///////////////////////// INCLUDE CSS NO ARQUIVO JS /////////////
+function includeCss($cssClass){
+	$('<style type="text/css">'+$cssClass+'</style>').appendTo('head');
+}
+////////////////////////// TOOLTIP GRID [EXT]///////////////////////////////////////
+function fn_toolTipCell(value, obj){
+	obj.attr='ext:qtip="'+value+'"';
+	return value;
+}
+////////////////////////// ADD SCRIPTS EM TEMPO DE EXECU«√O //////////////////////////////////
+function addJs(obj){
+					console.log(obj);
+					$.each(obj, function(){
+						var js = document.createElement('script');
+						js.src = this.path;
+						document.getElementsByTagName('head')[0].appendChild(js);
+					});
+				}
+				
+				//plugin uploader
+				addJs([
+					{path: PATH+'/res/plugins/uploader/jquery.plupload.queue.js'},
+					{path: PATH+'/res/plugins/uploader/plupload.js'}
+				]);
+////////////////// VALIDA DIGITO VERIFICADOR CPF ///////////////////////////////////////////
+function TestaCPF(strCPF) { 
+		var Soma; 
+		var Resto; 
+		Soma = 0; 
+		
+		if (strCPF == "00000000000") 
+			return false; 
+			
+		if (strCPF == "11111111111") 
+			return false; 
+		
+		if (strCPF == "22222222222") 
+			return false; 
+			
+		if (strCPF == "33333333333") 
+			return false; 
+		
+		if (strCPF == "44444444444") 
+			return false; 
+			
+		if (strCPF == "55555555555") 
+			return false; 
+		
+		if (strCPF == "66666666666") 
+			return false; 
+			
+		if (strCPF == "77777777777") 
+			return false; 
+			
+		if (strCPF == "88888888888") 
+			return false; 
+			
+		if (strCPF == "99999999999") 
+			return false; 		
+		
+		if (strCPF == "11144477735") 
+			return false; 		
+		
+		for (i=1; i<=9; i++) 
+			Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i); 
+		
+		Resto = (Soma * 10) % 11; 
+		
+		if ((Resto == 10) || (Resto == 11)) 
+			Resto = 0; 
+			
+		if (Resto != parseInt(strCPF.substring(9, 10)) ) 
+			return false; 
+		
+		Soma = 0; 
+		
+		for (i = 1; i <= 10; i++) 
+			Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+		
+		Resto = (Soma * 10) % 11; 
+		
+		if ((Resto == 10) || (Resto == 11)) 
+			Resto = 0; 
+		
+		if (Resto != parseInt(strCPF.substring(10, 11) ) ) 
+			return false; 
+			
+		return true; 
+		
+	} 

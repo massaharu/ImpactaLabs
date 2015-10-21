@@ -1,0 +1,15 @@
+sp_cursoagendadovalorespagos_get 103430
+
+SATURN.Simpac.dbo.sp_ValoresPagosAgendados 103430
+
+sp_instrutorcursosministrados_get_idcurso 1361,1247
+
+sp_apostilaslivrosvalores_list 1247
+sp_apostilaslivrosvaloresrelacao_list 1247
+
+
+sp_orcamentocursos_get 498925
+sp_lojavirtualcarrinho_list 1614,'31854461869'
+
+use rh
+

@@ -1,0 +1,24 @@
+paises x
+estados x
+Cidades x
+Bairro x
+logradourostipos x
+endereçotipo -
+logradouros -
+logradourostipos x
+departamentos x 
+cargos x
+contatostipos x 
+contatoscategorias x
+documentostipos x
+pessoajuridicatipos x
+
+
+https://simpac.impacta.com.br/simpacweb/labs/Massaharu/myTests_lab/ExtJs/5.ADM-para-CRM/cargos/win.cargos.php
+https://simpac.impacta.com.br/simpacweb/labs/Massaharu/myTests_lab/ExtJs/5.ADM-para-CRM/contatostipos/win.contatostipos.php
+https://simpac.impacta.com.br/simpacweb/labs/Massaharu/myTests_lab/ExtJs/5.ADM-para-CRM/contatoscategorias/win.contatoscategorias.php
+https://simpac.impacta.com.br/simpacweb/labs/Massaharu/myTests_lab/ExtJs/5.ADM-para-CRM/documentostipos/win.documentostipos.php
+https://simpac.impacta.com.br/simpacweb/labs/Massaharu/myTests_lab/ExtJs/5.ADM-para-CRM/logradourostipos/win.logradourostipos.php
+https://simpac.impacta.com.br/simpacweb/labs/Massaharu/myTests_lab/ExtJs/5.ADM-para-CRM/pessoajuridicatipos/win.pessoajuridicatipos.php
+https://simpac.impacta.com.br/simpacweb/labs/Massaharu/myTests_lab/ExtJs/5.ADM-para-CRM/adm-crm(localidades)_index.php
+https://simpac.impacta.com.br/simpacweb/labs/Massaharu/myTests_lab/ExtJs/5.ADM-para-CRM/departamentos/win.departamentos.php

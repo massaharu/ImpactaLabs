@@ -1,0 +1,58 @@
+.myborder-top{
+	border-top:1px solid;
+}
+.myborder-bottom{
+	border-bottom:1px solid;
+}
+.myborder-right{
+	border-right:1px solid;
+}
+.myborder-left{
+	border-left:1px solid;
+}
+
+body *{
+	font-family:"myriad Pro", Arial, Verdana;
+}
+#main-div{
+	position:relative;
+	width:80%;
+	margin:0 auto;
+	height:auto;
+}
+#main-title{
+	text-align:center;
+}
+#main-title h3{
+	text-decoration:underline;
+	text-align:center;
+}
+#dados-solicitante,
+#beneficiario{
+	margin-bottom:15px;
+}
+#dados-solicitante table,
+#beneficiario table,
+#reservado-analise table{
+	border:1px solid;
+	width:90%;
+}
+#dados-solicitante table .half td,
+#beneficiario .half td{
+	width:50%;
+}
+#dados-solicitante table .half td:first-child{
+	border-right:1px solid;
+}
+#beneficiario img,
+#reservado-analise img{
+	width:20px;
+	height:20px;
+	margin-bottom:-3px;
+}
+#beneficiario strong{
+	margin-right:20px;
+}
+#beneficiario table tr td.half{
+	text-align:center;
+}

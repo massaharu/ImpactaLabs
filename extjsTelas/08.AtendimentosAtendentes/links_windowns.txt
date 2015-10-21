@@ -1,0 +1,2 @@
+https://simpac.impacta.com.br/simpacweb/modulos//atendimento/chat-adm/usuarios.php
+https://simpac.impacta.com.br/simpacweb/modulos/atendimento/chat-relatorios/atendimentosHora.php

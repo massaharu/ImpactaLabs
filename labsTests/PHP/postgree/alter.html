@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="/simpacweb/labs/Massaharu/labsTests/PHP/postgree/ext-3.3.1/resources/css/ext-all.css" />
+<script src="/simpacweb/labs/Massaharu/labsTests/PHP/postgree/ext-3.3.1/adapter/ext/ext-base.js" type="text/javascript"></script>
+<script src="/simpacweb/labs/Massaharu/labsTests/PHP/postgree/ext-3.3.1/ext-all.js" type="text/javascript"></script>
+<script type="text/javascript">
+	Ext.onReady(function(){
+		new Ext.Viewport({
+			layout: 'border',
+			items: [{
+				region: 'west',
+				collapsible: false,
+				split:true,
+				autoScroll:true,
+				title: 'Navigation',
+				width: 600,
+				items:[{
+					xtype:'listview',
+					id:'alllistview',
+					store: new Ext.data.JsonStore({
+						url:'json/getProgramaDeAula.php',
+						root:'myData',
+						id:'storeprogramadeaula',
+						fields:['status','id','desdisplina','desturma','idcurso','idperiodo','idprofessor'],
+						autoLoad:true
+					}),
+					multiSelect: true,
+					loadMask:true,
+					reserveScrollOffset: true,
+					columns: [{
+						header: 'status',
+						width: .1,
+						dataIndex: 'status'
+					},{
+						header: 'ID',
+						width: .1,
+						dataIndex: 'id'
+					},{
+						header: 'Disciplina',
+						width: .4,
+						dataIndex: 'desdisplina'
+					},{
+						header: 'Turma',
+						width: .4,
+						dataIndex: 'desturma'
+					}],
+					listeners:{
+						'click':function(obj,i){
+							var store = obj.getStore().getAt(i);
+							Ext.getCmp('desdisciplinaiclass').setValue(store.get('desdisplina'));
+							Ext.getCmp('desturmaiclass').setValue(store.get('desturma'));
+							Ext.getCmp('a1').setValue('');
+							Ext.getCmp('a2').setValue('');
+						}
+					}
+				}]
+			}, {
+				region: 'center',
+				border:false,
+				items:[{
+					xtype:'form',
+					padding:20,
+					id:'formsave',
+					defaults:{
+						anchor:'100%'
+					},
+					items:[{
+						fieldLabel:'Disciplinas Iclass',
+						id:'desdisciplinaiclass',
+						xtype:'displayfield'
+					},{
+						fieldLabel:'Turma Iclass',
+						id:'desturmaiclass',
+						xtype:'displayfield'
+					},{
+						typeAhead: true,
+						allowBlank:false,
+						xtype:'combo',
+						fieldLabel:'Disciplinas',
+						triggerAction: 'all',
+						lazyRender:true,
+						mode: 'local',
+						id:'a1',
+						store: new Ext.data.JsonStore({
+							url:'json/getDisciplinas.php',
+							root:'myData',
+							fields:['iddisciplina','desdisciplina'],
+							autoLoad:true
+						}),
+						valueField: 'iddisciplina',
+						hiddenName: 'iddisciplina',
+						displayField: 'desdisciplina',
+						name:'iddisciplina'
+					},{
+						typeAhead: true,
+						xtype:'combo',
+						allowBlank:false,
+						fieldLabel:'Turmas',
+						triggerAction: 'all',
+						lazyRender:true,
+						mode: 'local',
+						id:'a2',
+						store: new Ext.data.JsonStore({
+							url:'json/getTurmas.php',
+							root:'myData',
+							fields:['idturma','desturma'],
+							autoLoad:true
+						}),
+						valueField: 'idturma',
+						hiddenName: 'idturma',
+						name:'idturma',
+						displayField: 'desturma'
+					}],
+					buttons:[{
+						text:'Salvar',
+						handler:function(){
+							if(Ext.getCmp('formsave').getForm().isValid()){
+								Ext.getCmp('formsave').getForm().submit({
+									url:'ajax/save.php',
+									params:{
+										id:Ext.getCmp('alllistview').getSelectedRecords()[0].data.id,
+										idcurso:Ext.getCmp('alllistview').getSelectedRecords()[0].data.idcurso,
+										idperiodo:Ext.getCmp('alllistview').getSelectedRecords()[0].data.idperiodo,
+										idprofessor:Ext.getCmp('alllistview').getSelectedRecords()[0].data.idprofessor
+									},
+									success:function(a,b){
+										Ext.getCmp('alllistview').getStore().reload();
+									}
+								})
+							}
+						}
+					}]
+				}]
+			}]
+		});
+	});
+</script>
+</head>
+<body>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" type="text/css" href="/simpacweb/labs/Massaharu/labsTests/PHP/postgree/ext-3.3.1/resources/css/ext-all.css" />
+<script src="/simpacweb/labs/Massaharu/labsTests/PHP/postgree/ext-3.3.1/adapter/ext/ext-base.js" type="text/javascript"></script>
+<script src="/simpacweb/labs/Massaharu/labsTests/PHP/postgree/ext-3.3.1/ext-all.js" type="text/javascript"></script>
+<script type="text/javascript">
+	Ext.onReady(function(){
+		new Ext.Viewport({
+			layout: 'border',
+			items: [{
+				region: 'west',
+				collapsible: false,
+				split:true,
+				autoScroll:true,
+				title: 'Navigation',
+				width: 600,
+				items:[{
+					xtype:'listview',
+					id:'alllistview',
+					store: new Ext.data.JsonStore({
+						url:'json/getCurso_x_disciplina.php',
+						root:'myData',
+						id:'storeprogramadeaula',
+						fields:['status','descurso','desdisciplina','idcurso'],
+						autoLoad:true
+					}),
+					multiSelect: true,
+					loadMask:true,
+					reserveScrollOffset: true,
+					columns: [{
+						header: 'status',
+						width: .1,
+						dataIndex: 'status'
+					},{
+						header: 'Curso',
+						width: .4,
+						dataIndex: 'descurso'
+					},{
+						header: 'Disciplina',
+						width: .4,
+						dataIndex: 'desdisciplina'
+					}],
+					listeners:{
+						'click':function(obj,i){
+							var store = obj.getStore().getAt(i);
+							Ext.getCmp('desdisciplinaiclass').setValue(store.get('desdisciplina'));
+							Ext.getCmp('descursoiclass').setValue(store.get('descurso'));
+							Ext.getCmp('a1').setValue('');
+						}
+					}
+				}]
+			}, {
+				region: 'center',
+				border:false,
+				items:[{
+					xtype:'form',
+					padding:20,
+					id:'formsave',
+					defaults:{
+						anchor:'100%'
+					},
+					items:[{
+						fieldLabel:'Curso',
+						id:'descursoiclass',
+						xtype:'displayfield'
+					},{
+						fieldLabel:'Disciplina iClass',
+						id:'desdisciplinaiclass',
+						xtype:'displayfield'
+					},{
+						typeAhead: true,
+						allowBlank:false,
+						xtype:'combo',
+						fieldLabel:'Disciplinas',
+						triggerAction: 'all',
+						lazyRender:true,
+						mode: 'local',
+						id:'a1',
+						store: new Ext.data.JsonStore({
+							url:'json/getDisciplinas.php',
+							root:'myData',
+							fields:['iddisciplina','desdisciplina'],
+							autoLoad:true
+						}),
+						valueField: 'iddisciplina',
+						hiddenName: 'iddisciplina',
+						displayField: 'desdisciplina',
+						name:'iddisciplina'
+					}],
+					buttons:[{
+						text:'Salvar',
+						handler:function(){
+							if(Ext.getCmp('formsave').getForm().isValid()){
+								Ext.getCmp('formsave').getForm().submit({
+									url:'ajax/save2.php',
+									params:{
+										idcurso:Ext.getCmp('alllistview').getSelectedRecords()[0].data.idcurso,
+									},
+									success:function(a,b){
+										Ext.MessageBox.alert('','OK');
+									}
+								})
+							}
+						}
+					}]
+				}]
+			}]
+		});
+	});
+</script>
+</head>
+<body>
+</body>
+</html>
+
+
+
+
+

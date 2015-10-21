@@ -1,0 +1,17 @@
+http://www.jotaquery.com.br/tools/identar-scripts/
+Empacotador de Javascript: compacta o programa
+Identar Scripts, descompacta e identa
+
+http://www.w3schools.com/
+http://www.tiexpert.net/index.php
+https://simpac.impacta.com.br/simpacweb/index.php
+http://parceiros.impacta.com.br/treinamento/index.php
+
+http://www.senchaexperts.com/api/extjs3.3/
+http://dev.sencha.com/deploy/ext-3.3.1/examples/
+https://simpac.impacta.com.br/simpacweb/extjs/ext-3.3.1/docs/index.html
+
+
+http://validator.w3.org/ (validador de html)
+http://jigsaw.w3.org/css-validator (validador de CSS)
+

@@ -1,0 +1,65 @@
+//////////////////////////////////////////////////////////////////////////////////////////
+////////////////// (CURSOR : EXEMPLO) /////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+DECLARE @SITUACAO int, @ISALLFINALIZED bit = 1
+		
+DECLARE ata_nota_cursor CURSOR FOR
+SELECT SITUACAO FROM sophia.ata_nota 
+WHERE TURMA = 2350 AND DISCIPLINA = 6
+		
+OPEN ata_nota_cursor
+FETCH NEXT FROM ata_nota_cursor INTO @SITUACAO
+		
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	IF(@SITUACAO <> 5)
+			SET @ISALLFINALIZED = 0
+	FETCH NEXT FROM ata_nota_cursor INTO @SITUACAO
+END
+		
+CLOSE ata_nota_cursor
+DEALLOCATE ata_nota_cursor
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////// WHERE DINÃMICO /////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+ALTER proc [dbo].[sp_tipo_doc_liberado_turma_list]
+(@cod_turma int = null, @tipo_doc int = null)
+AS
+BEGIN
+	--select b.desdocumento, b.deslink from tb_turmas_acessos_documentos_turmas_FIT a
+	--inner join tb_documento_turma_FIT b on a.iddocumento = b.iddocumento
+	--where a.cod_turma_sophia = @cod_turma and b.idtipodocumento = @tipo_doc and a.instatus = 1
+	--order by b.desdocumento
+	DECLARE
+	@sqlStatement nvarchar(max),
+	@WHERE nvarchar(300)
+	SET @WHERE = ''
+	
+	IF (@cod_turma IS NULL) AND (@tipo_doc IS NULL)
+		SET @WHERE = ''
+	ELSE IF @cod_turma IS NULL
+		SET @WHERE = 'WHERE c.idtipodocumento = @tipo_doc AND b.instatus = 1'
+	ELSE IF @tipo_doc IS NULL
+		SET @WHERE = 'WHERE a.id_cod_turma = @cod_turma AND b.instatus = 1'
+	ELSE	
+		SET @WHERE = 'WHERE c.idtipodocumento = @tipo_doc AND a.id_cod_turma = @cod_turma AND b.instatus = 1'
+		
+	
+	SET @sqlStatement = 
+		'SELECT 
+			a.id_cod_turma,
+			a.idturmapai, 
+			c.iddocumento, 
+			c.desdocumento, 
+			c.idtipodocumento,
+			c.deslink,
+			b.instatus,
+			b.dtcadastro  
+		FROM tb_turmapai a
+		INNER JOIN tb_turmapai_documento_turma_fit b ON b.idturmapai = a.idturmapai
+		INNER JOIN tb_documento_turma_FIT c ON c.iddocumento = b.iddocumento
+		'+@WHERE+''
+	 
+	exec sp_ExecuteSQL @sqlStatement, N'@cod_turma int, @tipo_doc int', @cod_turma,@tipo_doc
+END
