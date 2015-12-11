@@ -27,7 +27,7 @@ END
 --
 sp_midiassitenovotipo_list
 ------------------------------------------------------------------------
-ALTER PROC sp_midiassitenovobymidia_list
+ALTER PROC [dbo].[sp_midiassitenovobymidia_list]
 (@idmidia int = NULL, @de datetime, @ate datetime)
 AS
 /*
@@ -60,8 +60,10 @@ BEGIN
 		desmidia varchar(200),
 		dtcadastro datetime
 	)
-
+	
+	------------------------------------------------
 	-- Newsletter Impacta
+	------------------------------------------------
 	IF @idmidia = 84
 	BEGIN
 	
@@ -89,7 +91,7 @@ BEGIN
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa 
 		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 24
 		WHERE
-			b.idmidia = 84 AND k.idhistoricotipo = 24 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 84 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 24
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -101,7 +103,10 @@ BEGIN
 			b.dtcadastro DESC
 			
 	END
+	
+	------------------------------------------------
 	-- Formulário de Inscrição Vestibular
+	------------------------------------------------
 	ELSE IF @idmidia = 85
 	BEGIN
 	
@@ -142,9 +147,9 @@ BEGIN
 		LEFT JOIN tb_pessoasinteresses h ON h.idpessoa = a.idpessoa AND DAY(h.dtcadastro) = DAY(b.dtcadastro) AND MONTH(h.dtcadastro) = MONTH(b.dtcadastro) AND YEAR(h.dtcadastro) = YEAR(b.dtcadastro) AND DATEPART(hh, h.dtcadastro) = DATEPART(hh, b.dtcadastro)  
 		LEFT JOIN tb_interesses i ON i.idinteresse = h.idinteresse
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa
-		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 27
+		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 31
 		WHERE
-			b.idmidia = 85 AND k.idhistoricotipo = 27 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 85 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 31
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -153,11 +158,13 @@ BEGIN
 			b.dtcadastro
 		ORDER BY
 			b.dtcadastro DESC
-		
 			
 			
 	END
+	
+	------------------------------------------------
 	-- Formulário de Transferência
+	------------------------------------------------
 	ELSE IF @idmidia = 86
 	BEGIN
 	
@@ -200,7 +207,7 @@ BEGIN
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa 
 		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 20
 		WHERE
-			b.idmidia = 86 AND k.idhistoricotipo = 20 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 86 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 20
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -213,7 +220,10 @@ BEGIN
 			b.dtcadastro DESC
 			
 	END
+	
+	------------------------------------------------
 	-- Formulário de Contato
+	------------------------------------------------
 	ELSE IF @idmidia = 87
 	BEGIN
 	
@@ -254,7 +264,7 @@ BEGIN
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa
 		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 21
 		WHERE
-			b.idmidia = 87 AND k.idhistoricotipo = 21 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 87 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 21
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -267,7 +277,10 @@ BEGIN
 			b.dtcadastro DESC
 			
 	END
+	
+	------------------------------------------------
 	-- Formulário Inscreva-se Curso
+	------------------------------------------------
 	ELSE IF @idmidia = 88
 	BEGIN
 		
@@ -305,7 +318,7 @@ BEGIN
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa
 		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 23
 		WHERE
-			b.idmidia = 88 AND k.idhistoricotipo = 23 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 88 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 23
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -316,7 +329,10 @@ BEGIN
 			b.dtcadastro DESC
 			
 	END
+	
+	------------------------------------------------
 	-- Formulário Processo Seletivo
+	------------------------------------------------
 	ELSE IF @idmidia = 89
 	BEGIN
 		
@@ -354,7 +370,7 @@ BEGIN
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa
 		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 25
 		WHERE
-			b.idmidia = 89 AND k.idhistoricotipo = 25 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 89 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 25
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -365,7 +381,10 @@ BEGIN
 			b.dtcadastro DESC
 		
 	END
+	
+	------------------------------------------------
 	-- Indique um amigo
+	------------------------------------------------
 	ELSE IF @idmidia = 90
 	BEGIN
 		
@@ -404,7 +423,7 @@ BEGIN
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa 
 		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 26
 		WHERE
-			b.idmidia = 90 AND k.idhistoricotipo = 26 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 90 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 26
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -417,11 +436,223 @@ BEGIN
 			b.dtcadastro DESC
 		
 	END
-	-- TODOS
+	
+	------------------------------------------------
+	-- Landing Page Vestibular
+	------------------------------------------------
+	ELSE IF @idmidia = 91
+	BEGIN
+	
+		INSERT INTO @tb_leads 
+		(
+			idpessoa,
+			despessoa,
+			desemail,
+			nrtelresidencial,
+			nrcelular,
+			idmidia,
+			desmidia,
+			dtcadastro
+		)
+	
+		SELECT 
+			a.idpessoa,
+			a.despessoa, 
+			max(c.descontato),
+			max(e.descontato),
+			max(f.descontato),
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		FROM tb_pessoas a 
+		INNER JOIN tb_midiapessoas b ON b.idpessoa = a.idpessoa
+		LEFT JOIN tb_contatos c ON c.idpessoa = a.idpessoa AND c.idcontatotipo = 1
+		LEFT JOIN tb_contatos e ON e.idpessoa = a.idpessoa AND e.idcontatotipo = 2
+		LEFT JOIN tb_contatos f ON f.idpessoa = a.idpessoa AND f.idcontatotipo = 3
+		INNER JOIN tb_midias d ON d.idmidia = b.idmidia
+		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa 
+		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 28
+		WHERE
+			b.idmidia = 91 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 28
+		GROUP BY
+			a.idpessoa,
+			a.despessoa, 
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		ORDER BY
+			b.dtcadastro DESC
+			
+	END
+	
+	------------------------------------------------
+	-- Ganhe R$ 200 de credito na sua graduacao
+	------------------------------------------------
+	ELSE IF @idmidia = 43
+	BEGIN
+	
+		
+		INSERT INTO @tb_leads 
+		(
+			idpessoa,
+			despessoa,
+			desemail,
+			nrcelular,
+			nrtelresidencial,
+			descursointeresse,
+			idmidia,
+			desmidia,
+			dtcadastro
+		)
+	
+		SELECT 
+			a.idpessoa,
+			a.despessoa, 
+			MAX(c.descontato),
+			MAX(e.descontato),
+			MAX(f.descontato),
+			(SELECT desinteresse FROM tb_interesses aa INNER JOIN tb_pessoasinteresses bb ON bb.idinteresse = aa.idinteresse INNER JOIN tb_pessoas cc ON cc.idpessoa = bb.idpessoa WHERE bb.idpessoainteresse = MAX(h.idpessoainteresse)) as cursointeresse,
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		FROM tb_pessoas a 
+		INNER JOIN tb_midiapessoas b ON b.idpessoa = a.idpessoa
+		LEFT JOIN tb_contatos c ON c.idpessoa = a.idpessoa AND c.idcontatotipo = 1
+		LEFT JOIN tb_contatos e ON e.idpessoa = a.idpessoa AND e.idcontatotipo = 2
+		LEFT JOIN tb_contatos f ON f.idpessoa = a.idpessoa AND f.idcontatotipo = 2
+		INNER JOIN tb_midias d ON d.idmidia = b.idmidia
+		LEFT JOIN tb_pessoasinteresses h ON h.idpessoa = b.idpessoa AND DAY(h.dtcadastro) = DAY(b.dtcadastro) AND MONTH(h.dtcadastro) = MONTH(b.dtcadastro) AND YEAR(h.dtcadastro) = YEAR(b.dtcadastro) AND DATEPART(hh, h.dtcadastro) = DATEPART(hh, b.dtcadastro)  
+		LEFT JOIN tb_interesses i ON i.idinteresse = h.idinteresse
+		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa
+		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 32
+		WHERE
+			b.idmidia = 43 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 32
+		GROUP BY
+			a.idpessoa,
+			a.despessoa, 
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		ORDER BY
+			b.dtcadastro DESC
+			
+	END
+	
+	------------------------------------------------
+	-- Ganhe R$ 500 de credito na sua pos ou MBA
+	------------------------------------------------
+	ELSE IF @idmidia = 45
+	BEGIN
+	
+		
+		INSERT INTO @tb_leads 
+		(
+			idpessoa,
+			despessoa,
+			desemail,
+			nrcelular,
+			nrtelresidencial,
+			descursointeresse,
+			idmidia,
+			desmidia,
+			dtcadastro
+		)
+	
+		SELECT 
+			a.idpessoa,
+			a.despessoa, 
+			MAX(c.descontato),
+			MAX(e.descontato),
+			MAX(f.descontato),
+			(SELECT desinteresse FROM tb_interesses aa INNER JOIN tb_pessoasinteresses bb ON bb.idinteresse = aa.idinteresse INNER JOIN tb_pessoas cc ON cc.idpessoa = bb.idpessoa WHERE bb.idpessoainteresse = MAX(h.idpessoainteresse)) as cursointeresse,
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		FROM tb_pessoas a 
+		INNER JOIN tb_midiapessoas b ON b.idpessoa = a.idpessoa
+		LEFT JOIN tb_contatos c ON c.idpessoa = a.idpessoa AND c.idcontatotipo = 1
+		LEFT JOIN tb_contatos e ON e.idpessoa = a.idpessoa AND e.idcontatotipo = 2
+		LEFT JOIN tb_contatos f ON f.idpessoa = a.idpessoa AND f.idcontatotipo = 2
+		INNER JOIN tb_midias d ON d.idmidia = b.idmidia
+		LEFT JOIN tb_pessoasinteresses h ON h.idpessoa = b.idpessoa AND DAY(h.dtcadastro) = DAY(b.dtcadastro) AND MONTH(h.dtcadastro) = MONTH(b.dtcadastro) AND YEAR(h.dtcadastro) = YEAR(b.dtcadastro) AND DATEPART(hh, h.dtcadastro) = DATEPART(hh, b.dtcadastro)  
+		LEFT JOIN tb_interesses i ON i.idinteresse = h.idinteresse
+		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa
+		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 33
+		WHERE
+			b.idmidia = 45 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 33
+		GROUP BY
+			a.idpessoa,
+			a.despessoa, 
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		ORDER BY
+			b.dtcadastro DESC
+			
+	END
+	
+	------------------------------------------------
+	-- Quero mais informações
+	------------------------------------------------
+	ELSE IF @idmidia = 75
+	BEGIN
+		
+		INSERT INTO @tb_leads 
+		(
+			idpessoa,
+			despessoa,
+			desemail,
+			nrcelular,
+			nrtelresidencial,
+			descursointeresse,
+			idmidia,
+			desmidia,
+			dtcadastro
+		)
+	
+		SELECT 
+			a.idpessoa,
+			a.despessoa, 
+			MAX(c.descontato),
+			MAX(e.descontato),
+			MAX(f.descontato),
+			(SELECT desinteresse FROM tb_interesses aa INNER JOIN tb_pessoasinteresses bb ON bb.idinteresse = aa.idinteresse INNER JOIN tb_pessoas cc ON cc.idpessoa = bb.idpessoa WHERE bb.idpessoainteresse = MAX(h.idpessoainteresse)) as cursointeresse,
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		FROM tb_pessoas a 
+		INNER JOIN tb_midiapessoas b ON b.idpessoa = a.idpessoa
+		LEFT JOIN tb_contatos c ON c.idpessoa = a.idpessoa AND c.idcontatotipo = 1
+		LEFT JOIN tb_contatos e ON e.idpessoa = a.idpessoa AND e.idcontatotipo = 2
+		LEFT JOIN tb_contatos f ON f.idpessoa = a.idpessoa AND f.idcontatotipo = 2
+		INNER JOIN tb_midias d ON d.idmidia = b.idmidia
+		LEFT JOIN tb_pessoasinteresses h ON h.idpessoa = b.idpessoa AND DAY(h.dtcadastro) = DAY(b.dtcadastro) AND MONTH(h.dtcadastro) = MONTH(b.dtcadastro) AND YEAR(h.dtcadastro) = YEAR(b.dtcadastro) AND DATEPART(hh, h.dtcadastro) = DATEPART(hh, b.dtcadastro)  
+		LEFT JOIN tb_interesses i ON i.idinteresse = h.idinteresse
+		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa
+		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 34
+		WHERE
+			b.idmidia = 75 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 34
+		GROUP BY
+			a.idpessoa,
+			a.despessoa, 
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		ORDER BY
+			b.dtcadastro DESC
+			
+	END
+	-----------------------------------------------------------------------------------
+	-----------------------------------------------------------------------------------
+	------------------------------- TODOS ---------------------------------------------
+	-----------------------------------------------------------------------------------
+	-----------------------------------------------------------------------------------
 	ELSE IF @idmidia IS NULL
 	BEGIN
 		
+		--------------------------------
 		-- Newsletter Impacta		
+		--------------------------------
 		INSERT INTO @tb_leads 
 		(
 			idpessoa,
@@ -446,7 +677,7 @@ BEGIN
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa 
 		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 24
 		WHERE
-			b.idmidia = 84 AND k.idhistoricotipo = 24 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 84 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 24
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -457,7 +688,9 @@ BEGIN
 		ORDER BY
 			b.dtcadastro DESC
 			
+		----------------------------------------------------------------
 		-- Formulário de Inscrição Vestibular
+		----------------------------------------------------------------
 		INSERT INTO @tb_leads 
 		(
 			idpessoa,
@@ -497,7 +730,7 @@ BEGIN
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa
 		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 27
 		WHERE
-			b.idmidia = 85 AND k.idhistoricotipo = 27 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 85 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 27
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -507,7 +740,9 @@ BEGIN
 		ORDER BY
 			b.dtcadastro DESC
 			
+		--------------------------------
 		-- Formulário de Transferência
+		--------------------------------
 		INSERT INTO @tb_leads 
 		(
 			idpessoa,
@@ -547,7 +782,7 @@ BEGIN
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa
 		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 20
 		WHERE
-			b.idmidia = 86 AND k.idhistoricotipo = 20 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 86 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 20
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -559,7 +794,9 @@ BEGIN
 		ORDER BY
 			b.dtcadastro DESC
 			
+		--------------------------------
 		-- Formulário de Contato
+		--------------------------------
 		INSERT INTO @tb_leads 
 		(
 			idpessoa,
@@ -597,7 +834,7 @@ BEGIN
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa 
 		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 21
 		WHERE
-			b.idmidia = 87 AND k.idhistoricotipo = 21 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 87 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 21
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -608,8 +845,10 @@ BEGIN
 			b.dtcadastro
 		ORDER BY
 			b.dtcadastro DESC
-			
+		
+		--------------------------------			
 		-- Formulário Inscreva-se Curso
+		--------------------------------
 		INSERT INTO @tb_leads 
 		(
 			idpessoa,
@@ -644,7 +883,7 @@ BEGIN
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa 
 		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 23
 		WHERE
-			b.idmidia = 88 AND k.idhistoricotipo = 23 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 88 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 23
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -654,7 +893,9 @@ BEGIN
 		ORDER BY
 			b.dtcadastro DESC
 		
+		--------------------------------
 		-- Formulário Processo Seletivo
+		--------------------------------
 		INSERT INTO @tb_leads 
 		(
 			idpessoa,
@@ -689,7 +930,7 @@ BEGIN
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa
 		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 25
 		WHERE
-			b.idmidia = 89 AND k.idhistoricotipo = 25 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 89 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 25 
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -699,7 +940,9 @@ BEGIN
 		ORDER BY
 			b.dtcadastro DESC
 		
+		--------------------------------
 		-- Indique um amigo
+		--------------------------------
 		INSERT INTO @tb_leads 
 		(
 			idpessoa,
@@ -735,7 +978,7 @@ BEGIN
 		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa 
 		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 26
 		WHERE
-			b.idmidia = 90 AND k.idhistoricotipo = 26 AND b.dtcadastro BETWEEN @de AND (@ate + 1)
+			b.idmidia = 90 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 26
 		GROUP BY
 			a.idpessoa,
 			a.despessoa, 
@@ -746,7 +989,238 @@ BEGIN
 			b.dtcadastro
 		ORDER BY
 			b.dtcadastro DESC
+		
+		--------------------------------
+		-- Landing Page Vestibular
+		--------------------------------
+		INSERT INTO @tb_leads 
+		(
+			idpessoa,
+			despessoa,
+			desemail,
+			nrtelresidencial,
+			nrcelular,
+			idmidia,
+			desmidia,
+			dtcadastro
+		)
 	
+		SELECT 
+			a.idpessoa,
+			a.despessoa, 
+			max(c.descontato),
+			max(e.descontato),
+			max(f.descontato),
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		FROM tb_pessoas a 
+		INNER JOIN tb_midiapessoas b ON b.idpessoa = a.idpessoa
+		LEFT JOIN tb_contatos c ON c.idpessoa = a.idpessoa AND c.idcontatotipo = 1
+		LEFT JOIN tb_contatos e ON e.idpessoa = a.idpessoa AND e.idcontatotipo = 2
+		LEFT JOIN tb_contatos f ON f.idpessoa = a.idpessoa AND f.idcontatotipo = 3
+		INNER JOIN tb_midias d ON d.idmidia = b.idmidia
+		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa 
+		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 28
+		WHERE
+			b.idmidia = 91 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 28
+		GROUP BY
+			a.idpessoa,
+			a.despessoa, 
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		ORDER BY
+			b.dtcadastro DESC
+			
+		----------------------------------------------------------------			
+		-- Landing Page Vestibular Conveniados
+		----------------------------------------------------------------
+		INSERT INTO @tb_leads 
+		(
+			idpessoa,
+			despessoa,
+			desemail,
+			nrtelresidencial,
+			nrcelular,
+			idmidia,
+			desmidia,
+			dtcadastro
+		)
+	
+		SELECT 
+			a.idpessoa,
+			a.despessoa, 
+			max(c.descontato),
+			max(e.descontato),
+			max(f.descontato),
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		FROM tb_pessoas a 
+		INNER JOIN tb_midiapessoas b ON b.idpessoa = a.idpessoa
+		LEFT JOIN tb_contatos c ON c.idpessoa = a.idpessoa AND c.idcontatotipo = 1
+		LEFT JOIN tb_contatos e ON e.idpessoa = a.idpessoa AND e.idcontatotipo = 2
+		LEFT JOIN tb_contatos f ON f.idpessoa = a.idpessoa AND f.idcontatotipo = 3
+		INNER JOIN tb_midias d ON d.idmidia = b.idmidia
+		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa 
+		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 35
+		WHERE
+			b.idmidia = 119 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 35
+		GROUP BY
+			a.idpessoa,
+			a.despessoa, 
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		ORDER BY
+			b.dtcadastro DESC
+			
+		------------------------------------------------
+		-- Ganhe R$ 200 de credito na sua graduacao
+		------------------------------------------------
+		
+		INSERT INTO @tb_leads 
+		(
+			idpessoa,
+			despessoa,
+			desemail,
+			nrcelular,
+			nrtelresidencial,
+			descursointeresse,
+			idmidia,
+			desmidia,
+			dtcadastro
+		)
+	
+		SELECT 
+			a.idpessoa,
+			a.despessoa, 
+			MAX(c.descontato),
+			MAX(e.descontato),
+			MAX(f.descontato),
+			(SELECT desinteresse FROM tb_interesses aa INNER JOIN tb_pessoasinteresses bb ON bb.idinteresse = aa.idinteresse INNER JOIN tb_pessoas cc ON cc.idpessoa = bb.idpessoa WHERE bb.idpessoainteresse = MAX(h.idpessoainteresse)) as cursointeresse,
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		FROM tb_pessoas a 
+		INNER JOIN tb_midiapessoas b ON b.idpessoa = a.idpessoa
+		LEFT JOIN tb_contatos c ON c.idpessoa = a.idpessoa AND c.idcontatotipo = 1
+		LEFT JOIN tb_contatos e ON e.idpessoa = a.idpessoa AND e.idcontatotipo = 2
+		LEFT JOIN tb_contatos f ON f.idpessoa = a.idpessoa AND f.idcontatotipo = 2
+		INNER JOIN tb_midias d ON d.idmidia = b.idmidia
+		LEFT JOIN tb_pessoasinteresses h ON h.idpessoa = b.idpessoa AND DAY(h.dtcadastro) = DAY(b.dtcadastro) AND MONTH(h.dtcadastro) = MONTH(b.dtcadastro) AND YEAR(h.dtcadastro) = YEAR(b.dtcadastro) AND DATEPART(hh, h.dtcadastro) = DATEPART(hh, b.dtcadastro)  
+		LEFT JOIN tb_interesses i ON i.idinteresse = h.idinteresse
+		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa
+		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 32
+		WHERE
+			b.idmidia = 43 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 32
+		GROUP BY
+			a.idpessoa,
+			a.despessoa, 
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		ORDER BY
+			b.dtcadastro DESC
+			
+	
+		------------------------------------------------
+		-- Ganhe R$ 500 de credito na sua pos ou MBA
+		------------------------------------------------
+		
+		INSERT INTO @tb_leads 
+		(
+			idpessoa,
+			despessoa,
+			desemail,
+			nrcelular,
+			nrtelresidencial,
+			descursointeresse,
+			idmidia,
+			desmidia,
+			dtcadastro
+		)
+	
+		SELECT 
+			a.idpessoa,
+			a.despessoa, 
+			MAX(c.descontato),
+			MAX(e.descontato),
+			MAX(f.descontato),
+			(SELECT desinteresse FROM tb_interesses aa INNER JOIN tb_pessoasinteresses bb ON bb.idinteresse = aa.idinteresse INNER JOIN tb_pessoas cc ON cc.idpessoa = bb.idpessoa WHERE bb.idpessoainteresse = MAX(h.idpessoainteresse)) as cursointeresse,
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		FROM tb_pessoas a 
+		INNER JOIN tb_midiapessoas b ON b.idpessoa = a.idpessoa
+		LEFT JOIN tb_contatos c ON c.idpessoa = a.idpessoa AND c.idcontatotipo = 1
+		LEFT JOIN tb_contatos e ON e.idpessoa = a.idpessoa AND e.idcontatotipo = 2
+		LEFT JOIN tb_contatos f ON f.idpessoa = a.idpessoa AND f.idcontatotipo = 2
+		INNER JOIN tb_midias d ON d.idmidia = b.idmidia
+		LEFT JOIN tb_pessoasinteresses h ON h.idpessoa = b.idpessoa AND DAY(h.dtcadastro) = DAY(b.dtcadastro) AND MONTH(h.dtcadastro) = MONTH(b.dtcadastro) AND YEAR(h.dtcadastro) = YEAR(b.dtcadastro) AND DATEPART(hh, h.dtcadastro) = DATEPART(hh, b.dtcadastro)  
+		LEFT JOIN tb_interesses i ON i.idinteresse = h.idinteresse
+		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa
+		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 33
+		WHERE
+			b.idmidia = 45 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 33
+		GROUP BY
+			a.idpessoa,
+			a.despessoa, 
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		ORDER BY
+			b.dtcadastro DESC
+			
+	
+		------------------------------------------------
+		-- Quero mais informações
+		------------------------------------------------
+		
+		INSERT INTO @tb_leads 
+		(
+			idpessoa,
+			despessoa,
+			desemail,
+			nrcelular,
+			nrtelresidencial,
+			descursointeresse,
+			idmidia,
+			desmidia,
+			dtcadastro
+		)
+	
+		SELECT 
+			a.idpessoa,
+			a.despessoa, 
+			MAX(c.descontato),
+			MAX(e.descontato),
+			MAX(f.descontato),
+			(SELECT desinteresse FROM tb_interesses aa INNER JOIN tb_pessoasinteresses bb ON bb.idinteresse = aa.idinteresse INNER JOIN tb_pessoas cc ON cc.idpessoa = bb.idpessoa WHERE bb.idpessoainteresse = MAX(h.idpessoainteresse)) as cursointeresse,
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		FROM tb_pessoas a 
+		INNER JOIN tb_midiapessoas b ON b.idpessoa = a.idpessoa
+		LEFT JOIN tb_contatos c ON c.idpessoa = a.idpessoa AND c.idcontatotipo = 1
+		LEFT JOIN tb_contatos e ON e.idpessoa = a.idpessoa AND e.idcontatotipo = 2
+		LEFT JOIN tb_contatos f ON f.idpessoa = a.idpessoa AND f.idcontatotipo = 2
+		INNER JOIN tb_midias d ON d.idmidia = b.idmidia
+		LEFT JOIN tb_pessoasinteresses h ON h.idpessoa = b.idpessoa AND DAY(h.dtcadastro) = DAY(b.dtcadastro) AND MONTH(h.dtcadastro) = MONTH(b.dtcadastro) AND YEAR(h.dtcadastro) = YEAR(b.dtcadastro) AND DATEPART(hh, h.dtcadastro) = DATEPART(hh, b.dtcadastro)  
+		LEFT JOIN tb_interesses i ON i.idinteresse = h.idinteresse
+		LEFT JOIN tb_pessoashistoricos j ON j.idpessoa = b.idpessoa
+		LEFT JOIN tb_pessoashistoricos_tipos k ON k.idhistorico = j.idhistorico AND k.idhistoricotipo = 34
+		WHERE
+			b.idmidia = 75 AND b.dtcadastro BETWEEN @de AND (@ate + 1) AND k.idhistoricotipo = 34
+		GROUP BY
+			a.idpessoa,
+			a.despessoa, 
+			d.idmidia,
+			d.desmidia,
+			b.dtcadastro
+		ORDER BY
+			b.dtcadastro DESC
 	END
 	
 	SET NOCOUNT OFF
